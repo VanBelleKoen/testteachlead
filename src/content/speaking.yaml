@@ -1,0 +1,14 @@
+engagements:
+  - date: 2025-09-22 - 2025-09-24
+    title: The common pitfalls of API testing
+    location: ApiDays London
+    description: A transformative session on the common pitfalls in API testing, focusing on practical solutions and best practices.
+  - date: 2025-10-21 - 2025-10-23
+    title: The benefits and drawbacks of a multi-repository approach
+    location: Cypress Conf 2025, Virtual
+    description: A comprehensive look at the multi-repository approach in Cypress, discussing its advantages and challenges.
+  - date: 2025-11-7
+    title: Becoming a full-stack tester
+    location: Brewtcon, Leuven
+    description: The why and how of becoming a full-stack tester, with practical insights and strategies.
+

@@ -1,0 +1,10 @@
+# About Me content for the About page
+sections:
+  - title: "Work"
+    content: |
+      I'm a test automation engineer with a passion for building useful things. I love learning new technologies and sharing knowledge with others.
+  - title: "Hobbies"
+    content: |
+      In my free time, I enjoy archery, reading, and exploring new places.
+      
+      I enjoy working on open source, and collaborating with others to make the web a better place.

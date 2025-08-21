@@ -1,0 +1,27 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import yaml from 'js-yaml';
+import fs from 'fs';
+
+const yamlFile: string = fs.readFileSync('src/content/projects.yaml', 'utf8');
+const yamlData = yaml.load(yamlFile);
+const projects = (yamlData && typeof yamlData === 'object' && 'projects' in yamlData) ? (yamlData.projects as Array<{ slug: string; title: string; description: string }>) : [];
+---
+<SiteLayout title="Projects" description="Personal and professional projects by Koen Van Belle.">
+  <section class="page-section themed-section">
+    <header class="section-header themed-header">
+      <h1 class="themed-title">Projects</h1>
+      <hr class="themed-divider" />
+    </header>
+    <div class="section-content themed-content">
+      {projects.map(project => (
+      <div class="project themed-item" style="margin-bottom: 2rem;">
+        <h3 class="themed-project-title">
+        <a href={`/projects/${project.slug}`}>{project.title}</a>
+        </h3>
+        <p class="themed-project-desc">{project.description}</p>
+      </div>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

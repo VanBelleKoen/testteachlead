@@ -1,0 +1,46 @@
+---
+import yaml from 'js-yaml';
+import fs from 'fs';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+interface Engagement {
+  date: string;
+  title: string;
+  location: string;
+  description: string;
+}
+
+const yamlFile: string = fs.readFileSync('src/content/speaking.yaml', 'utf8');
+const yamlData = yaml.load(yamlFile) as { engagements: Engagement[] };
+const engagements: Engagement[] = yamlData.engagements;
+---
+
+<SiteLayout title="Speaking Engagements" description="Upcoming and past speaking events by Koen Van Belle.">
+  <section>
+    <h1>Speaking Engagements</h1>
+    <hr />
+    {engagements.map((e: Engagement) => {
+      let dateDisplay = '';
+      if (typeof e.date === 'string' && e.date.includes(' - ')) {
+        const parts = e.date.split(' - ').map(s => s.trim());
+        if (parts.length === 2) {
+          const start = new Date(parts[0]);
+          const end = new Date(parts[1]);
+          dateDisplay = `${start.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} - ${end.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`;
+        } else {
+          dateDisplay = new Date(e.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+      } else {
+        dateDisplay = new Date(e.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+      return (
+        <div>
+          <div><strong>{dateDisplay}</strong></div>
+          <div><span>{e.title}</span></div>
+          <div><span>{e.location}</span></div>
+          <div><span>{e.description}</span></div>
+        </div>
+      );
+    })}
+  </section>
+</SiteLayout>

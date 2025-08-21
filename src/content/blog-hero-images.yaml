@@ -1,0 +1,36 @@
+mappings:
+  - keywords: [postman]
+    image: /blog-postman.svg
+  - keywords: [cypress]
+    image: /blog-cypress.svg
+  - keywords: [playwright]
+    image: /blog-playwright.svg
+  - keywords: [AI, AGI, Artificial Intelligence]
+    image: /blog-ai.svg
+  - keywords: [katalon]
+    image: /blog-katalon.svg
+  - keywords: [insomnia]
+    image: /blog-insomnia.svg
+  - keywords: [vim, neovim]
+    image: /blog-neovim.svg
+  - keywords: [artillery]
+    image: /blog-artillery.svg
+  - keywords: [git]
+    image: /blog-git.svg
+  - keywords: [tricentis]
+    image: /blog-tricentis.svg
+  - keywords: [eggplant]
+    image: /blog-eggplant.svg
+  - keywords: [cucumber]
+    image: /blog-cucumber.svg
+  - keywords: [netflix]
+    image: /blog-netflix.svg
+  - keywords: [test automation, automation]
+    image: /blog-test-automation.svg
+  - keywords: [API]
+    image: /blog-api.svg
+  - keywords: [test, testing]
+    image: /blog-testing.svg
+  - keywords: [aws, amazon web services]
+    image: /blog-aws.svg
+default: /blog-default.svg

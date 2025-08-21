@@ -1,86 +1,92 @@
 ---
+import SiteLayout from './SiteLayout.astro';
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+interface BlogPostProps {
+  title: string;
+  description: string;
+  pubDate: string | Date;
+  updatedDate?: string | Date;
+  heroImage?: string | ImageMetadata;
+}
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props as BlogPostProps;
+
+function toDate(val: string | Date | undefined): Date | undefined {
+  if (!val) return undefined;
+  return val instanceof Date ? val : new Date(val);
+}
+
+const pubDateObj = toDate(pubDate);
+const updatedDateObj = toDate(updatedDate);
+
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<SiteLayout title={title} description={description}>
+  <article class="blogpost-single">
+    <div class="prose">
+      <div class="title">
+        <div class="date">
+          {pubDateObj instanceof Date && !isNaN(pubDateObj.getTime()) && <FormattedDate date={pubDateObj} />}
+          {updatedDateObj instanceof Date && !isNaN(updatedDateObj.getTime()) && (
+            <div class="last-updated-on">
+              Last updated on <FormattedDate date={updatedDateObj} />
+            </div>
+          )}
+        </div>
+        <h1>{title}</h1>
+        <hr />
+      </div>
+      <div>
+        <slot />
+      </div>
+    </div>
+  </article>
+</SiteLayout>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+<style>
+  .blogpost-single {
+    width: auto;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background: var(--bg-card);
+    border-radius: 1.2rem;
+    box-shadow: var(--box-shadow);
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+  }
+  .prose ul,
+  .prose ol {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .prose pre {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 1em;
+    font-size: 0.95em;
+    box-sizing: border-box;
+    white-space: pre;
+    word-break: normal;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-color);
+  }
+  .prose code {
+    word-break: normal;
+    white-space: pre;
+    font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+    font-size: 0.97em;
+    background: none;
+    padding: 0;
+    border: none;
+    display: inline;
+  }
+</style>

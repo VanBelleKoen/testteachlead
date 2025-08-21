@@ -1,0 +1,68 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import yaml from 'js-yaml';
+import fs from 'fs';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const yamlFile = fs.readFileSync('src/content/projects.yaml', 'utf8');
+  const yamlData = yaml.load(yamlFile) as { projects: { slug: string; title: string; description: string }[] };
+  return yamlData.projects.map(project => {
+    // Try to import the corresponding markdown file
+    const mdPath = `../content/projects/${project.slug}.md`;
+    let MarkdownComponent;
+    try {
+      MarkdownComponent = require(mdPath);
+    } catch {
+      MarkdownComponent = null;
+    }
+    
+    return {
+      params: { slug: project.slug },
+      props: { 
+        ...project,
+        MarkdownComponent
+      },
+    };
+  });
+}
+
+const { title, description, slug } = Astro.props as { title: string; description: string; slug: string };
+
+// Dynamically import the markdown file as a component
+let ProjectContent;
+try {
+  ProjectContent = (await import(`../../content/projects/${slug}.md`)).default;
+} catch (error) {
+  console.error(`Could not load markdown file for project: ${slug}`, error);
+  ProjectContent = null;
+}
+---
+<SiteLayout title={title} description={description}>
+  {ProjectContent ? (
+    <div class="project-content">
+      <ProjectContent />
+    </div>
+  ) : (
+    <>
+      <h2>{title}</h2>
+      <hr />
+      <p>{description}</p>
+    </>
+  )}
+</SiteLayout>
+
+<style>
+  .project-content ul {
+    display: block !important;
+    list-style-type: disc !important;
+    padding-left: 2em !important;
+    text-align: left !important;
+  }
+  
+  .project-content li {
+    width: auto !important;
+    text-align: left !important;
+    margin-bottom: 0.5em !important;
+  }
+</style>
