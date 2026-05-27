@@ -1,23 +1,300 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import HomeContent from '../content/home.md';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import yaml from 'js-yaml';
+import fs from 'fs';
+
+// Fetch recent blog posts
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// Fetch featured projects
+let projects: Array<{ slug: string; title: string; description: string }> = [];
+try {
+  const yamlFile = fs.readFileSync('src/content/projects.yaml', 'utf8');
+  const yamlData = yaml.load(yamlFile) as { projects: Array<{ slug: string; title: string; description: string }> };
+  projects = yamlData.projects.slice(0, 3);
+} catch (error) {
+  console.error('Error reading projects for home page:', error);
+}
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<article>
-				<HomeContent />
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+<SiteLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <section class="hero-section">
+    <div class="hero-tag">Quality &bull; Mentorship &bull; Leadership</div>
+    <h1 class="hero-title">Test. Teach. Lead.</h1>
+    <p class="hero-subtitle">
+      Empowering software engineering teams through test automation expertise and practical leadership guidance.
+    </p>
+    <div class="hero-actions">
+      <a href="/blog" class="btn btn-primary">Read the Blog</a>
+      <a href="/projects" class="btn btn-secondary">Explore Projects</a>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <div class="home-grid">
+    <div class="main-content-column">
+      <div class="prose-card">
+        <HomeContent />
+      </div>
+    </div>
+    
+    <div class="side-content-column">
+      <div class="section-panel">
+        <h3 class="panel-title">Recent Writing</h3>
+        <ul class="recent-list">
+          {posts.map(post => (
+            <li class="recent-item">
+              <span class="item-date">
+                <FormattedDate date={post.data.pubDate} />
+              </span>
+              <a href={`/blog/${post.id}/`} class="item-link">
+                {post.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href="/blog" class="panel-more-link">View all posts &rarr;</a>
+      </div>
+
+      <div class="section-panel">
+        <h3 class="panel-title">Featured Projects</h3>
+        <ul class="recent-list">
+          {projects.map(project => (
+            <li class="recent-item">
+              <a href={`/projects/${project.slug}`} class="item-link project-title-link">
+                {project.title.split(' (')[0]}
+              </a>
+              <p class="item-desc">{project.description.slice(0, 90)}...</p>
+            </li>
+          ))}
+        </ul>
+        <a href="/projects" class="panel-more-link">View all projects &rarr;</a>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  /* Hero Section */
+  .hero-section {
+    text-align: center;
+    padding: 3rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.5;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    transition: background-color var(--transition-smooth), color var(--transition-smooth), border-color var(--transition-smooth);
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--accent-primary);
+    color: var(--text-primary);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-secondary);
+    color: var(--text-primary);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+  }
+
+  .section-divider {
+    margin: 3rem 0;
+  }
+
+  /* Homepage Layout Grid */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 3rem;
+  }
+
+  .prose-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    height: 100%;
+  }
+
+  .prose-card :global(h2) {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border: none;
+    padding: 0;
+  }
+
+  .prose-card :global(p) {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-card :global(p:last-of-type) {
+    margin-bottom: 0;
+  }
+
+  /* Side Panel */
+  .side-content-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .section-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .panel-title {
+    font-size: 1.15rem;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .recent-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .recent-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .item-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .item-link {
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    transition: color var(--transition-smooth);
+  }
+
+  .item-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .project-title-link {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .item-desc {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .panel-more-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent-primary);
+    transition: color var(--transition-smooth);
+  }
+
+  .panel-more-link:hover {
+    color: var(--accent-secondary);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 900px) {
+    .home-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-title {
+      font-size: 2.75rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-title {
+      font-size: 2.25rem;
+    }
+    
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    
+    .prose-card {
+      padding: 1.5rem;
+    }
+  }
+</style>

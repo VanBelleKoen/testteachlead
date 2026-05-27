@@ -2,26 +2,15 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import yaml from 'js-yaml';
 import fs from 'fs';
-import path from 'path';
 
 export async function getStaticPaths() {
   const yamlFile = fs.readFileSync('src/content/projects.yaml', 'utf8');
   const yamlData = yaml.load(yamlFile) as { projects: { slug: string; title: string; description: string }[] };
   return yamlData.projects.map(project => {
-    // Try to import the corresponding markdown file
-    const mdPath = `../content/projects/${project.slug}.md`;
-    let MarkdownComponent;
-    try {
-      MarkdownComponent = require(mdPath);
-    } catch {
-      MarkdownComponent = null;
-    }
-    
     return {
       params: { slug: project.slug },
       props: { 
-        ...project,
-        MarkdownComponent
+        ...project
       },
     };
   });
@@ -39,30 +28,113 @@ try {
 }
 ---
 <SiteLayout title={title} description={description}>
-  {ProjectContent ? (
-    <div class="project-content">
-      <ProjectContent />
+  <article class="project-post-container">
+    <div class="prose-card">
+      {ProjectContent ? (
+        <div class="project-content">
+          <ProjectContent />
+        </div>
+      ) : (
+        <div class="project-fallback">
+          <h1 class="project-fallback-title">{title}</h1>
+          <hr class="header-divider" />
+          <p class="project-fallback-desc">{description}</p>
+        </div>
+      )}
+      <div class="back-navigation">
+        <a href="/projects" class="back-link">&larr; Back to all projects</a>
+      </div>
     </div>
-  ) : (
-    <>
-      <h2>{title}</h2>
-      <hr />
-      <p>{description}</p>
-    </>
-  )}
+  </article>
 </SiteLayout>
 
 <style>
-  .project-content ul {
-    display: block !important;
-    list-style-type: disc !important;
-    padding-left: 2em !important;
-    text-align: left !important;
+  .project-post-container {
+    max-width: 760px;
+    margin: 0 auto;
   }
-  
-  .project-content li {
-    width: auto !important;
-    text-align: left !important;
-    margin-bottom: 0.5em !important;
+
+  .prose-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Target markdown contents */
+  .project-content :global(h1) {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.025em;
+  }
+
+  .project-content :global(h2) {
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .project-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .project-content :global(ul) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .project-content :global(li) {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+  }
+
+  /* Fallback template styling if MD file fails to load */
+  .project-fallback-title {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+  }
+
+  .header-divider {
+    border: none;
+    height: 1px;
+    background: var(--border-color);
+    margin: 1.5rem 0;
+  }
+
+  .project-fallback-desc {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Navigation footer */
+  .back-navigation {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .back-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color var(--transition-smooth);
+  }
+
+  .back-link:hover {
+    color: var(--accent-primary);
+  }
+
+  @media (max-width: 768px) {
+    .prose-card {
+      padding: 1.75rem 1.25rem;
+      border-radius: 8px;
+    }
   }
 </style>

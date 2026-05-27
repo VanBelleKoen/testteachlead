@@ -9,18 +9,125 @@ const aboutMeContent = yaml.load(aboutMeRaw) as { sections: { title: string, con
 ---
 
 <SiteLayout title={SITE_TITLE + ' | About Me'} description={SITE_DESCRIPTION}>
-  <h1>About Me</h1>
-  <hr />
-  {aboutMeContent.sections.map(section => (
-    <section>
-      <h2>{section.title}</h2>
-      <div class="about-content" set:html={section.content} />
-    </section>
-  ))}
+  <div class="about-container">
+    <header class="about-header">
+      <div class="avatar-placeholder">
+        <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <h1 class="about-title">About Me</h1>
+      <p class="about-subtitle">A brief overview of my professional background and personal interests.</p>
+    </header>
+
+    <div class="about-grid">
+      {aboutMeContent.sections.map(section => (
+        <section class="about-card">
+          <h2 class="card-title">
+            <span class="title-decorator"></span>
+            {section.title}
+          </h2>
+          <div class="card-content" set:html={section.content} />
+        </section>
+      ))}
+    </div>
+  </div>
 </SiteLayout>
 
 <style>
-  section {
-    margin-bottom: 2rem;
+  .about-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    color: var(--text-secondary);
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .about-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .about-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding: 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .title-decorator {
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background: var(--accent-primary);
+    border-radius: 2px;
+  }
+
+  .card-content {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .card-content :global(p) {
+    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  .card-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 600px) {
+    .about-card {
+      padding: 1.5rem;
+    }
+    
+    .about-title {
+      font-size: 2rem;
+    }
   }
 </style>

@@ -6,22 +6,194 @@ import fs from 'fs';
 const yamlFile: string = fs.readFileSync('src/content/projects.yaml', 'utf8');
 const yamlData = yaml.load(yamlFile);
 const projects = (yamlData && typeof yamlData === 'object' && 'projects' in yamlData) ? (yamlData.projects as Array<{ slug: string; title: string; description: string }>) : [];
+
+function getProjectTags(slug: string): string[] {
+  const tags: Record<string, string[]> = {
+    Jobbonus: ['Government', 'Eligibility System'],
+    Sustatool: ['Sustainability', 'KPI Tracking'],
+    VlaamseArbeidsmigratie: ['Government', 'Migration Registry'],
+    Kwaliteitsdatabank: ['Government', 'Open Data Registry'],
+    Opleidingsverlof: ['Government', 'Education Scheme'],
+    KwalificerendWerkplekleren: ['Government', 'Education Grant'],
+    PIO: ['Astro Blog', 'Knowledge Sharing'],
+    Loket: ['Government', 'Portal Hub'],
+    Zetes: ['Signing Service', 'Security'],
+    mbp: ['Government', 'Citizen Portal'],
+    WebPlatform: ['Frameworks', 'Public Sector'],
+    TestDataGenerator: ['Testing Utility', 'Serverless'],
+    ewings: ['E-commerce', 'Proof of Concept'],
+    arxcus: ['Invoicing Tool', 'Billing POC'],
+    BaloiseInsurance: ['Testing Integration', 'Insurance'],
+    Argenta: ['Mobile Banking', 'FinTech'],
+    VEX: ['Supply Chain', 'Logistics Platform']
+  };
+  return tags[slug] || ['Software Engineering'];
+}
 ---
+
 <SiteLayout title="Projects" description="Personal and professional projects by Koen Van Belle.">
-  <section class="page-section themed-section">
-    <header class="section-header themed-header">
-      <h1 class="themed-title">Projects</h1>
-      <hr class="themed-divider" />
+  <div class="projects-container">
+    <header class="page-header">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-subtitle">A collection of systems, applications, and integrations I have built or tested.</p>
     </header>
-    <div class="section-content themed-content">
-      {projects.map(project => (
-      <div class="project themed-item" style="margin-bottom: 2rem;">
-        <h3 class="themed-project-title">
-        <a href={`/projects/${project.slug}`}>{project.title}</a>
-        </h3>
-        <p class="themed-project-desc">{project.description}</p>
-      </div>
-      ))}
+
+    <div class="projects-grid">
+      {projects.map(project => {
+        const tags = getProjectTags(project.slug);
+        return (
+          <article class="project-card">
+            <div class="card-body">
+              <div class="card-tags">
+                {tags.map(tag => (
+                  <span class="tag-badge">{tag}</span>
+                ))}
+              </div>
+              <h3 class="card-title">
+                <a href={`/projects/${project.slug}`} class="card-link">
+                  {project.title.split(' (')[0]}
+                </a>
+              </h3>
+              {project.title.includes('(') && (
+                <div class="card-org">{project.title.match(/\(([^)]+)\)/)?.[0]}</div>
+              )}
+              <p class="card-desc">{project.description}</p>
+            </div>
+            <div class="card-footer">
+              <a href={`/projects/${project.slug}`} class="read-more-link">
+                View project details <span class="arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
+        );
+      })}
     </div>
-  </section>
+  </div>
 </SiteLayout>
+
+<style>
+  .projects-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Grid Layout */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color var(--transition-smooth);
+  }
+
+  .project-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag-badge {
+    font-size: 0.75rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+    line-height: 1.35;
+  }
+
+  .card-link {
+    color: var(--text-primary);
+    transition: color var(--transition-smooth);
+  }
+
+  .card-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .card-org {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .read-more-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color var(--transition-smooth);
+  }
+
+  .project-card:hover .read-more-link {
+    color: var(--accent-primary);
+  }
+
+  .arrow {
+    transition: transform var(--transition-smooth);
+  }
+
+  .project-card:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 600px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

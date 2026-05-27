@@ -2,112 +2,37 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BaseHead from '../components/BaseHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
 ---
 <html lang="en">
   <head>
-    <BaseHead title={Astro.props.title ?? 'Site'} description={Astro.props.description ?? ''} />
+    <BaseHead title={title} description={description} />
     <slot name="head" />
     <style>
       body {
-        margin: 0;
-        padding: 0;
-      }
-      main {
-        max-width: 800px;
-        margin: 3rem auto;
-        padding: 2.5rem 2rem;
-        border-radius: 1.2rem;
-        box-shadow: var(--box-shadow);
         display: flex;
         flex-direction: column;
-        align-items: center;
-        background: var(--bg-card);
-        color: var(--text-primary);
-        border: 1px solid var(--border-color);
+        min-height: 100vh;
       }
-      section {
+      
+      main {
+        flex: 1;
         width: 100%;
-        max-width: 600px;
-        margin-bottom: 1.2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        box-sizing: border-box;
       }
-      h1, h2 {
-        margin-bottom: 0.2em;
-        text-align: center;
-        color: var(--accent-primary);
-      }
-      hr {
-        border: none;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-        margin: 0.7em 0 1.2em 0;
-        border-radius: 2px;
-      }
-      .about-content {
-        font-size: 1.15rem;
-        line-height: 1.8;
-      }
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      ul li {
-        width: calc(33.33% - 0.67rem);
-        margin-bottom: 0.5rem;
-        text-align: center;
-      }
-      
-      /* Override centering for regular markdown content */
-      article ul, 
-      section ul, 
-      .prose ul {
-        display: block !important;
-        list-style-type: disc !important;
-        padding-left: 2em !important;
-      }
-      
-      article ul li,
-      section ul li,
-      .prose ul li {
-        width: auto !important;
-        text-align: left !important;
-        margin-bottom: 0.5em !important;
-      }
-      ul li * {
-        text-decoration: none;
-        transition: 0.2s ease;
-      }
-      ul li img, ul li svg {
-        width: 180px !important;
-        height: 90px !important;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto 0.25rem auto;
-        border-radius: 12px;
-      }
-      ul li .title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin: 0.5em 0 0.25em 0;
-      }
-      ul li a {
-        display: block;
-      }
-      .title, .date {
-        margin: 0;
-        color: inherit;
-        line-height: 1;
-      }
-      @media (max-width: 720px) {
-        ul {
-          gap: 0.5em;
-        }
-        ul li {
-          width: 100%;
-          text-align: center;
+
+      @media (max-width: 768px) {
+        main {
+          padding: 2rem 1rem;
         }
       }
     </style>

@@ -11,4 +11,7 @@ engagements:
     title: Becoming a full-stack tester
     location: Brewtcon, Leuven
     description: The why and how of becoming a full-stack tester, with practical insights and strategies.
-
+  - date: 2026-10-13
+    title: Perception dictates reality
+    location: Testcon, Vilnius, Lithuania
+    description: Our understanding of reality is shaped less by facts than by how we perceive them. Decisions are rarely made based on perfect information, yet their consequences are very real.

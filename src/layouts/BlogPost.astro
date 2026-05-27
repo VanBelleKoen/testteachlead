@@ -1,6 +1,5 @@
 ---
 import SiteLayout from './SiteLayout.astro';
-import { Image } from 'astro:assets';
 import FormattedDate from '../components/FormattedDate.astro';
 
 interface BlogPostProps {
@@ -8,7 +7,7 @@ interface BlogPostProps {
   description: string;
   pubDate: string | Date;
   updatedDate?: string | Date;
-  heroImage?: string | ImageMetadata;
+  heroImage?: string;
 }
 
 const { title, description, pubDate, updatedDate } = Astro.props as BlogPostProps;
@@ -20,25 +19,26 @@ function toDate(val: string | Date | undefined): Date | undefined {
 
 const pubDateObj = toDate(pubDate);
 const updatedDateObj = toDate(updatedDate);
-
 ---
 
 <SiteLayout title={title} description={description}>
-  <article class="blogpost-single">
-    <div class="prose">
-      <div class="title">
-        <div class="date">
-          {pubDateObj instanceof Date && !isNaN(pubDateObj.getTime()) && <FormattedDate date={pubDateObj} />}
+  <article class="blog-post-container">
+    <div class="prose-card">
+      <header class="post-header">
+        <div class="post-meta">
+          {pubDateObj instanceof Date && !isNaN(pubDateObj.getTime()) && (
+            <span class="pub-date"><FormattedDate date={pubDateObj} /></span>
+          )}
           {updatedDateObj instanceof Date && !isNaN(updatedDateObj.getTime()) && (
-            <div class="last-updated-on">
-              Last updated on <FormattedDate date={updatedDateObj} />
-            </div>
+            <span class="updated-date">
+              (Updated <FormattedDate date={updatedDateObj} />)
+            </span>
           )}
         </div>
-        <h1>{title}</h1>
-        <hr />
-      </div>
-      <div>
+        <h1 class="post-title">{title}</h1>
+        <hr class="header-divider" />
+      </header>
+      <div class="post-content">
         <slot />
       </div>
     </div>
@@ -46,47 +46,106 @@ const updatedDateObj = toDate(updatedDate);
 </SiteLayout>
 
 <style>
-  .blogpost-single {
-    width: auto;
+  .blog-post-container {
+    max-width: 760px;
     margin: 0 auto;
-    padding: 2rem 1rem;
-    background: var(--bg-card);
-    border-radius: 1.2rem;
-    box-shadow: var(--box-shadow);
-    box-sizing: border-box;
-    border: 1px solid var(--border-color);
   }
-  .prose ul,
-  .prose ol {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
-  }
-  .prose pre {
-    max-width: 100%;
-    width: 100%;
-    overflow-x: auto !important;
-    overflow-y: hidden;
+
+  .prose-card {
     background: var(--bg-secondary);
-    color: var(--text-primary);
-    border-radius: 8px;
-    padding: 1em;
-    font-size: 0.95em;
-    box-sizing: border-box;
-    white-space: pre;
-    word-break: normal;
-    display: block;
-    -webkit-overflow-scrolling: touch;
     border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: var(--shadow-md);
   }
-  .prose code {
-    word-break: normal;
-    white-space: pre;
-    font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
-    font-size: 0.97em;
-    background: none;
-    padding: 0;
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .post-title {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin: 0.5rem 0 1rem 0;
+    letter-spacing: -0.025em;
+  }
+
+  .header-divider {
     border: none;
-    display: inline;
+    height: 1px;
+    background: var(--border-color);
+    margin: 1.5rem 0;
+  }
+
+  .post-content :global(h2) {
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+  }
+
+  .post-content :global(pre) {
+    margin: 1.75rem 0;
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-tertiary) !important;
+    overflow-x: auto;
+  }
+
+  .post-content :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875em;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    .prose-card {
+      padding: 1.75rem 1.25rem;
+      border-radius: 8px;
+    }
+
+    .post-title {
+      font-size: 1.75rem;
+    }
   }
 </style>
