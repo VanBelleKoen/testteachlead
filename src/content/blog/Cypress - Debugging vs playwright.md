@@ -1,7 +1,11 @@
 ---
-title: "Debugging with Cypress vs. Playwright"
-description: "A comparison of debugging features in Cypress and Playwright, highlighting the advantages of Cypress's time travel debugging."
-pubDate: "2023-10-10"
+title: Debugging with Cypress vs. Playwright
+description: A comparison of debugging features in Cypress and Playwright, highlighting the advantages of Cypress's time travel debugging.
+pubDate: '2023-10-10'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 When it comes to end-to-end testing, developers often face the challenging task of debugging failing tests. Two of the most popular tools in this space are Cypress and Playwright. Both offer powerful features, but Cypress excels, particularly in the realm of time travel debugging. In this blog post, we'll explore the differences in debugging between Cypress and Playwright and highlight why Cypress's approach to time travel debugging gives it a significant edge.
@@ -31,7 +35,7 @@ Playwright also offers debugging tools, but they lack the seamless integration a
 1. **Playwright Inspector**: Playwright provides an Inspector tool that allows developers to pause tests and inspect the current state of the application. While useful, it doesn't offer the same level of time travel capabilities as Cypress. In addition, there is a specific `BASH` command required to enable the inspector: `PWDEBUG=1 node my_script.js`. 
    
 2. **Console Logs and Tracing**: Playwright relies heavily on console logs and tracing for debugging. Developers need to manually add logging statements to their tests, which can be time-consuming and less intuitive compared to Cypress's automatic capturing of test states. This tracing has to be enabled and stopped using a line of code. Example code is below this paragraph. Another way to increase logging would be to add the verbose logging in playwright: `DEBUG=pw:api node my_script.js`
-```JAVASCRIPT
+```javascript
 await page.tracing.start({ screenshots: true, snapshots: true });
 await page.goto('https://example.com');
 await page.tracing.stop({ path: 'trace.zip' });

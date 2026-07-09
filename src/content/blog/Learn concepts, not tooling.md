@@ -1,7 +1,11 @@
 ---
-title: "Playwright vs. Cypress: Why Testing Concepts Matter More Than Tools"
-description: "A comparison of Playwright and Cypress focusing on fundamental testing concepts."
-pubDate: "2025-07-31"
+title: 'Playwright vs. Cypress: Why Testing Concepts Matter More Than Tools'
+description: A comparison of Playwright and Cypress focusing on fundamental testing concepts.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 The debate between Playwright and Cypress fans shows no signs of cooling down. Both tools have their strengths, but the real question is: should you invest time mastering a tool, or should you focus on the fundamental concepts of testing?

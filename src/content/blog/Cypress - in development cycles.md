@@ -1,7 +1,11 @@
 ---
-title: "Cypress in the Development Cycle: TDD, BDD, and Best Practices"
-description: "How Cypress fits into modern development cycles, enabling TDD, BDD, and robust test automation."
-pubDate: "2025-07-31"
+title: 'Cypress in the Development Cycle: TDD, BDD, and Best Practices'
+description: How Cypress fits into modern development cycles, enabling TDD, BDD, and robust test automation.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 ## The importance of testing into the development cycle

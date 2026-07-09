@@ -1,7 +1,11 @@
 ---
-title: "Vim Motions: How I Learned to Code Faster"
-description: "A personal journey into Vim motions, keyboard efficiency, and staying in the coding flow."
-pubDate: "2025-07-31"
+title: 'Vim Motions: How I Learned to Code Faster'
+description: A personal journey into Vim motions, keyboard efficiency, and staying in the coding flow.
+pubDate: '2025-07-31'
+category: developer-tooling
+tags:
+  - developer-tooling
+  - editors
 ---
 
 ### Vim Motions: How I Learned to Code Faster

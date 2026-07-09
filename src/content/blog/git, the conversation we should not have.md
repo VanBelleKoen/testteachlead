@@ -1,7 +1,11 @@
 ---
-title: "Git: The Conversation We Shouldn't Have"
-description: "How endless debates about version control workflows are stealing our most precious resource: time to actually build things"
-pubDate: "2025-07-31"
+title: 'Git: The Conversation We Shouldn''t Have'
+description: 'How endless debates about version control workflows are stealing our most precious resource: time to actually build things'
+pubDate: '2025-07-31'
+category: developer-tooling
+tags:
+  - developer-tooling
+  - git
 ---
 
 *How endless debates about version control workflows are stealing our most precious resource: time to actually build things*

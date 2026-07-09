@@ -1,7 +1,11 @@
 ---
-title: "Cypress Accessibility"
-description: "Exploring the Cypress Accessibility addition to the Cypress Cloud platform."
-pubDate: "2023-10-10"
+title: Cypress Accessibility
+description: Exploring the Cypress Accessibility addition to the Cypress Cloud platform.
+pubDate: '2023-10-10'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 # Cypress Accessibility 
@@ -41,7 +45,7 @@ Implementing this feature couldn't be easier. Providing you have access to Cypre
 It is as simple as adding a projectId into your cypress configuration and a small addition to the run command. 
 In order to record the test results, Cypress requires two new parameters to be added: the --record and -- key. This would make your command look something like this: 
 
-``` BASH
+```bash
 npx cypress run --record --key a99b62b7-a128-4f2b-836d-7a42411d583c 
 ``` 
 

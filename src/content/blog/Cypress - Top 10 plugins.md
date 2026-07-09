@@ -1,7 +1,11 @@
 ---
-title: "Elevate Your Cypress Testing: Top 10 Essential Plugins for 2024"
-description: "Discover the top 10 Cypress plugins to boost your end-to-end testing efficiency, reporting, and developer experience in 2024."
-pubDate: "2024-07-31"
+title: 'Elevate Your Cypress Testing: Top 10 Essential Plugins for 2024'
+description: Discover the top 10 Cypress plugins to boost your end-to-end testing efficiency, reporting, and developer experience in 2024.
+pubDate: '2024-07-31'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 ## Intro:

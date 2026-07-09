@@ -1,7 +1,11 @@
 ---
-title: "Tricentis Tosca: Automated Continuous Testing Reviewed"
-description: "A hands-on review of Tricentis Tosca, its drag-and-drop approach, ease of use, and technical depth for test automation."
-pubDate: "2025-07-31"
+title: 'Tricentis Tosca: Automated Continuous Testing Reviewed'
+description: A hands-on review of Tricentis Tosca, its drag-and-drop approach, ease of use, and technical depth for test automation.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - test-tools
 ---
 
 A few months ago, we received a demo about Tricentis Tosca as a testing tool. Their Tricentis Tosca would be the solution for continuous automated testing. We as testers were immediately skeptical. It seemed too good to be true. How it was explained to us, writing tests would be a matter of drag&drop, no technical skill required.

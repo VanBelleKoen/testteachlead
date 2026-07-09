@@ -1,7 +1,11 @@
 ---
-title: "From VSCode to Neovim: A Journey of Control and Customization"
-description: "A personal journey from mastering Vim motions in VSCode to embracing the power of Neovim."
-pubDate: "2025-07-31"
+title: 'From VSCode to Neovim: A Journey of Control and Customization'
+description: A personal journey from mastering Vim motions in VSCode to embracing the power of Neovim.
+pubDate: '2025-07-31'
+category: developer-tooling
+tags:
+  - developer-tooling
+  - editors
 ---
 
 In my previous post, I explored mastering Vim motions, a key part of enhancing productivity and efficiency. But my journey didn’t stop there. After getting comfortable with Vim motions in VSCode, I decided it was time to take things to the next level: migrating to NeoVim. However, this transition wasn't as smooth as I had hoped.

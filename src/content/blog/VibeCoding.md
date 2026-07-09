@@ -1,7 +1,11 @@
 ---
-title: "Vibe Coding: An AI Skeptic's Guide to Productive Ideation"
-description: "How to use AI for brainstorming, pattern discovery, and ideation without relying on generated code."
-pubDate: "2025-07-31"
+title: 'Vibe Coding: An AI Skeptic''s Guide to Productive Ideation'
+description: How to use AI for brainstorming, pattern discovery, and ideation without relying on generated code.
+pubDate: '2025-07-31'
+category: ai-and-tooling
+tags:
+  - ai
+  - llm
 ---
 
 As someone who maintains a healthy skepticism about AI's role in software development, I've discovered an unexpected sweet spot in what I call "vibe coding" – using AI not as a replacement for thinking, but as a catalyst for it.

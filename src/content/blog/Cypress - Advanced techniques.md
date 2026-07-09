@@ -1,7 +1,11 @@
 ---
-title: "Advanced Testing Techniques in Cypress: Mocking and Validating API Calls"
-description: "Explore advanced Cypress techniques for mocking, modifying, and validating API calls, simulating network failures, and writing maintainable tests."
-pubDate: "2025-07-31"
+title: 'Advanced Testing Techniques in Cypress: Mocking and Validating API Calls'
+description: Explore advanced Cypress techniques for mocking, modifying, and validating API calls, simulating network failures, and writing maintainable tests.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 Cypress provides powerful tools for mocking and validating API calls. In this blog, we’ll explore advanced testing techniques, including how to manipulate API requests using `cy.intercept`, validate if API calls have been made using `cy.spy`, handle unspyable events with `cy.on('fail')`, and use function-based selectors to keep tests maintainable.

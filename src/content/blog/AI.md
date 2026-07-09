@@ -1,7 +1,11 @@
 ---
-title: "AI: Advanced Statistics"
-description: "Exploring the statistical foundations, definitions, and future challenges of Artificial Intelligence."
-pubDate: "2025-07-31"
+title: 'AI: Advanced Statistics'
+description: Exploring the statistical foundations, definitions, and future challenges of Artificial Intelligence.
+pubDate: '2025-07-31'
+category: ai-and-tooling
+tags:
+  - ai
+  - llm
 ---
 
 ### AI: Advanced Statistics

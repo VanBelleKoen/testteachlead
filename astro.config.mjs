@@ -4,9 +4,11 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
+const siteUrl = process.env.SITE_URL || 'https://testteachlead.com';
+
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: siteUrl,
 	integrations: [mdx(), sitemap()],
 	vite: {
 		assetsInclude: ['**/*.yaml'],

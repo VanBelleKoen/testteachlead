@@ -1,7 +1,10 @@
 ---
-title: "The Value of Shift-Right Testing: A Test Automation Engineer’s Perspective"
-description: "Exploring the importance of shift-right testing, production monitoring, and the synergy with shift-left practices."
-pubDate: "2025-07-31"
+title: 'The Value of Shift-Right Testing: A Test Automation Engineer’s Perspective'
+description: Exploring the importance of shift-right testing, production monitoring, and the synergy with shift-left practices.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 In recent years, testing practices have evolved significantly. Test automation engineers are not just responsible for testing software before it reaches production; they are now key players in maintaining the health of systems post-deployment. Shift-right testing is at the heart of this change, focusing on testing and monitoring live systems in production to ensure stability and performance. Combined with the traditional shift-left approach, which emphasizes testing early in the development lifecycle, shift-right testing enables companies to build more reliable, resilient software.

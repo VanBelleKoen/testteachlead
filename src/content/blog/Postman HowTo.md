@@ -1,7 +1,11 @@
 ---
-title: "Postman Testing Guide"
-description: "A comprehensive guide on how to test APIs using Postman, covering everything from basic to advanced features."
-pubDate: "2023-10-07"
+title: Postman Testing Guide
+description: A comprehensive guide on how to test APIs using Postman, covering everything from basic to advanced features.
+pubDate: '2023-10-07'
+category: api-testing
+tags:
+  - testing
+  - api-testing
 ---
 
 ## A Short How-to-test Using Postman

@@ -1,0 +1,197 @@
+---
+import { Image } from 'astro:assets';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../../consts';
+import { getBlogHeroImage } from '../../../utils/getBlogHeroImage';
+import { getBlogPostsByTag, getBlogTagStaticPaths, getBlogTagSummaries } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  return getBlogTagStaticPaths();
+}
+
+const { tagSummary } = Astro.props as { tagSummary: { label: string; slug: string; count: number } };
+const posts = await getBlogPostsByTag(tagSummary.slug);
+const tagSummaries = await getBlogTagSummaries();
+---
+
+<SiteLayout
+  title={`${SITE_TITLE} | Tag: ${tagSummary.label}`}
+  description={`Browse ${tagSummary.count} blog posts tagged with ${tagSummary.label}.`}
+>
+  <div class="blog-container">
+    <header class="page-header">
+      <h1 class="page-title">Tag: {tagSummary.label}</h1>
+      <p class="page-subtitle">{tagSummary.count} post{tagSummary.count === 1 ? '' : 's'} in this topic.</p>
+    </header>
+
+    <div class="tax-nav">
+      <a href="/blog" class="tax-link">All posts</a>
+      <a href="/blog/categories" class="tax-link">Categories</a>
+      <a href="/blog/tags" class="tax-link active">Tags</a>
+    </div>
+
+    <div class="tag-cloud">
+      {tagSummaries.map((tag) => (
+        <a href={`/blog/tags/${tag.slug}/`} class:list={["tag-pill", { active: tag.slug === tagSummary.slug }]}>
+          {tag.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="blog-grid">
+      {posts.map(({ post }) => {
+        const { src, visual } = getBlogHeroImage(post.data.heroImage, post.data.title);
+        return (
+          <article class="blog-card">
+            <a href={`/blog/${post.id}/`} class="card-image-link">
+              <div class="image-wrapper">
+                {visual
+                  ? (<img src={src} alt={post.data.title} class="post-image" loading="lazy" />)
+                  : (<Image width={320} height={160} src={src} alt={post.data.title} class="post-image" loading="lazy" />)
+                }
+              </div>
+            </a>
+            <div class="card-content">
+              <div class="post-meta">
+                <span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+              </div>
+              <h3 class="post-title">
+                <a href={`/blog/${post.id}/`} class="title-link">{post.data.title}</a>
+              </h3>
+              <p class="post-excerpt">{post.data.description}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .blog-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    margin: 0 0 0.4rem 0;
+  }
+
+  .page-subtitle {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .tax-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .tax-link {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-secondary);
+  }
+
+  .tax-link.active,
+  .tax-link:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .tag-pill {
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    color: var(--text-secondary);
+  }
+
+  .tag-pill.active,
+  .tag-pill:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .card-image-link {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    border-radius: 0;
+  }
+
+  .card-content {
+    padding: 1.25rem;
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .post-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+  }
+
+  .title-link {
+    color: var(--text-primary);
+  }
+
+  .title-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .post-excerpt {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+</style>

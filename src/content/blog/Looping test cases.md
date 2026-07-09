@@ -1,7 +1,11 @@
 ---
-title: "The Benefits of Looping in Cypress Test Cases"
-description: "Exploring the advantages of using loops in Cypress test automation."
-pubDate: "2023-10-05"
+title: The Benefits of Looping in Cypress Test Cases
+description: Exploring the advantages of using loops in Cypress test automation.
+pubDate: '2023-10-05'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 When writing test cases in Cypress, a common challenge is avoiding duplicated code while maintaining clear and effective reporting. One powerful technique to achieve this is looping—either over test values or selectors. While using loops in test automation might seem counterintuitive, they can lead to cleaner, more efficient tests with improved execution speed and reporting clarity.

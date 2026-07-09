@@ -1,7 +1,10 @@
 ---
-title: "Guiding principles for Test Automation"
-description: "Essential guidelines and considerations for effective test automation in modern applications."
-pubDate: "2025-07-31"
+title: Guiding principles for Test Automation
+description: Essential guidelines and considerations for effective test automation in modern applications.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 Recently, b.ignited was asked to give guidelines for automating tests. Specifically, when and what should you automate within an application. Initially, we considered this assignment to be easy. It quickly became clear that this was not the case. In fact, writing down what most of us would consider fingerspitzengefühl was one of the hardest things done.

@@ -1,11 +1,20 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import fs from 'node:fs';
-import yaml from 'js-yaml';
+import { render } from 'astro:content';
+import { getAboutEntriesSorted } from '../lib/content';
 
-const aboutMeRaw = fs.readFileSync('./src/content/aboutMe.yaml', 'utf8');
-const aboutMeContent = yaml.load(aboutMeRaw) as { sections: { title: string, content: string }[] };
+const sections = await getAboutEntriesSorted();
+
+const aboutSections = await Promise.all(
+  sections.map(async (section) => {
+    const { Content } = await render(section);
+    return {
+      ...section,
+      Content,
+    };
+  }),
+);
 ---
 
 <SiteLayout title={SITE_TITLE + ' | About Me'} description={SITE_DESCRIPTION}>
@@ -22,13 +31,15 @@ const aboutMeContent = yaml.load(aboutMeRaw) as { sections: { title: string, con
     </header>
 
     <div class="about-grid">
-      {aboutMeContent.sections.map(section => (
+      {aboutSections.map(section => (
         <section class="about-card">
           <h2 class="card-title">
             <span class="title-decorator"></span>
-            {section.title}
+            {section.data.title}
           </h2>
-          <div class="card-content" set:html={section.content} />
+          <div class="card-content">
+            <section.Content />
+          </div>
         </section>
       ))}
     </div>

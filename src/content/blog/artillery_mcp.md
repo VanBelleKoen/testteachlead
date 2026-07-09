@@ -1,7 +1,11 @@
 ---
-title: "Artillery + MCP Server: Better Daily Flow with AI Workflows"
-description: "How to use Artillery through an MCP server to improve performance testing habits and enable AI-assisted execution."
-pubDate: "2026-04-27"
+title: 'Artillery + MCP Server: Better Daily Flow with AI Workflows'
+description: How to use Artillery through an MCP server to improve performance testing habits and enable AI-assisted execution.
+pubDate: '2026-04-27'
+category: ai-and-tooling
+tags:
+  - ai
+  - llm
 ---
 
 # Artillery + MCP Server

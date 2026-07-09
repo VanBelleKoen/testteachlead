@@ -88,6 +88,7 @@ Your post content here...
 - **Change social links:** Edit the social links in `src/components/Header.astro` and `src/components/Footer.astro`.
 - **Change theme/colors:** Edit `src/styles/global.css` or the inline styles in your layout/page files.
 - **Add new pages:** Create new `.astro` or `.md` files in `src/pages/`.
+- **Set canonical site URL:** Configure `SITE_URL` (see `.env.example`) so canonical links, sitemap, RSS, and social metadata use your real production domain.
 
 ## 🧩 Integrations & Extensibility
 

@@ -8,9 +8,11 @@ interface BlogPostProps {
   pubDate: string | Date;
   updatedDate?: string | Date;
   heroImage?: string;
+  tags?: Array<{ label: string; slug: string }>;
+  category?: { label: string; slug: string };
 }
 
-const { title, description, pubDate, updatedDate } = Astro.props as BlogPostProps;
+const { title, description, pubDate, updatedDate, tags = [], category } = Astro.props as BlogPostProps;
 
 function toDate(val: string | Date | undefined): Date | undefined {
   if (!val) return undefined;
@@ -25,6 +27,7 @@ const updatedDateObj = toDate(updatedDate);
   <article class="blog-post-container">
     <div class="prose-card">
       <header class="post-header">
+        <div class="post-kicker">Editorial</div>
         <div class="post-meta">
           {pubDateObj instanceof Date && !isNaN(pubDateObj.getTime()) && (
             <span class="pub-date"><FormattedDate date={pubDateObj} /></span>
@@ -35,7 +38,18 @@ const updatedDateObj = toDate(updatedDate);
             </span>
           )}
         </div>
+        {(category || tags.length > 0) && (
+          <div class="taxonomy-row">
+            {category && (
+              <a href={`/blog/categories/${category.slug}/`} class="category-chip">{category.label}</a>
+            )}
+            {tags.slice(0, 4).map((tag) => (
+              <a href={`/blog/tags/${tag.slug}/`} class="tag-chip">{tag.label}</a>
+            ))}
+          </div>
+        )}
         <h1 class="post-title">{title}</h1>
+        <p class="post-description">{description}</p>
         <hr class="header-divider" />
       </header>
       <div class="post-content">
@@ -52,15 +66,24 @@ const updatedDateObj = toDate(updatedDate);
   }
 
   .prose-card {
-    background: var(--bg-secondary);
+    background: linear-gradient(160deg, rgba(34, 211, 238, 0.1), rgba(34, 211, 238, 0.02)), var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 3rem;
     box-shadow: var(--shadow-md);
   }
 
   .post-header {
     margin-bottom: 2rem;
+  }
+
+  .post-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    color: var(--accent-blog);
+    margin-bottom: 0.5rem;
   }
 
   .post-meta {
@@ -73,11 +96,46 @@ const updatedDateObj = toDate(updatedDate);
     align-items: center;
   }
 
+  .taxonomy-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.95rem;
+  }
+
+  .category-chip,
+  .tag-chip {
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    padding: 0.16rem 0.62rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .category-chip {
+    border-color: rgba(34, 211, 238, 0.45);
+    background: rgba(34, 211, 238, 0.12);
+    color: var(--accent-blog);
+  }
+
+  .tag-chip:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+  }
+
   .post-title {
     font-size: 2.25rem;
     line-height: 1.2;
     margin: 0.5rem 0 1rem 0;
     letter-spacing: -0.025em;
+  }
+
+  .post-description {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    max-width: 58ch;
   }
 
   .header-divider {

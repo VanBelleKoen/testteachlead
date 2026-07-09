@@ -1,7 +1,10 @@
 ---
-title: "Full Stack Testing: Quality from Frontend to Backend"
-description: "A practical guide to holistic testing across frontend and backend using Cypress, Vitest, and Apollo Client."
-pubDate: "2025-07-31"
+title: 'Full Stack Testing: Quality from Frontend to Backend'
+description: A practical guide to holistic testing across frontend and backend using Cypress, Vitest, and Apollo Client.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 When people hear **“full stack”**, they often think about developers—those unicorns who write Vue in the morning, wrangle GraphQL in the afternoon, and somehow squeeze in DevOps before dinner. But there’s another full stack role that gets far less attention: the full stack test engineer.

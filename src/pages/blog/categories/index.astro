@@ -1,0 +1,79 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { SITE_TITLE } from '../../../consts';
+import { getBlogCategorySummaries } from '../../../lib/content';
+
+const categories = await getBlogCategorySummaries();
+---
+
+<SiteLayout title={`${SITE_TITLE} | Blog Categories`} description="Browse blog posts by category.">
+  <div class="taxonomy-container">
+    <header class="page-header">
+      <h1 class="page-title">Blog Categories</h1>
+      <p class="page-subtitle">Explore posts grouped by category.</p>
+    </header>
+
+    <ul class="taxonomy-list">
+      {categories.map((category) => (
+        <li class="taxonomy-item">
+          <a href={`/blog/categories/${category.slug}/`} class="taxonomy-link">
+            <span class="label">{category.label}</span>
+            <span class="count">{category.count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</SiteLayout>
+
+<style>
+  .taxonomy-container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .taxonomy-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .taxonomy-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+    color: var(--text-primary);
+  }
+
+  .taxonomy-link:hover {
+    border-color: var(--border-hover);
+    color: var(--accent-primary);
+  }
+
+  .count {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,7 +1,11 @@
 ---
-title: "API Testing in E-Commerce: Ensuring Seamless Functionality"
-description: "The importance of API testing in e-commerce platforms and key areas to focus on."
-pubDate: "2025-07-31"
+title: 'API Testing in E-Commerce: Ensuring Seamless Functionality'
+description: The importance of API testing in e-commerce platforms and key areas to focus on.
+pubDate: '2025-07-31'
+category: api-testing
+tags:
+  - testing
+  - api-testing
 ---
 
 ## Why API Testing is Essential for E-Commerce

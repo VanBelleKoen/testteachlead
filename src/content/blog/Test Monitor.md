@@ -1,7 +1,10 @@
 ---
-title: "Test Monitor: A Review of Test Case Management"
-description: "An in-depth review of Test Monitor, its features, pros, cons, and suitability for manual testing teams."
-pubDate: "2025-07-31"
+title: 'Test Monitor: A Review of Test Case Management'
+description: An in-depth review of Test Monitor, its features, pros, cons, and suitability for manual testing teams.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 *Test case management simplified*

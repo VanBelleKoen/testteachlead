@@ -4,7 +4,10 @@ const today = new Date();
 
 <footer class="site-footer">
 	<div class="footer-container">
-		<p class="copyright">&copy; {today.getFullYear()} Koen Van Belle. All rights reserved.</p>
+		<div class="footer-copy-group">
+			<p class="copyright">&copy; {today.getFullYear()} Koen Van Belle. All rights reserved.</p>
+			<p class="footer-note">Engineering quality systems and practical test leadership.</p>
+		</div>
 		<div class="social-links">
 			<a href="https://github.com/VanBelleKoen" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
 				<svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true">
@@ -22,7 +25,7 @@ const today = new Date();
 
 <style>
 	.site-footer {
-		background: var(--bg-primary);
+		background: linear-gradient(180deg, rgba(6, 10, 18, 0.08), rgba(6, 10, 18, 0.9)), var(--bg-primary);
 		border-top: 1px solid var(--border-color);
 		padding: 2.5rem 1.5rem;
 		margin-top: auto;
@@ -35,12 +38,25 @@ const today = new Date();
 		justify-content: space-between;
 		max-width: 1000px;
 		margin: 0 auto;
+		gap: 1.5rem;
+	}
+
+	.footer-copy-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
 	}
 
 	.copyright {
 		margin: 0;
 		font-size: 0.9rem;
 		color: var(--text-secondary);
+	}
+
+	.footer-note {
+		margin: 0;
+		font-size: 0.82rem;
+		color: var(--text-muted);
 	}
 
 	.social-links {
@@ -53,11 +69,20 @@ const today = new Date();
 		color: var(--text-secondary);
 		display: flex;
 		align-items: center;
-		transition: color var(--transition-smooth);
+		justify-content: center;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 999px;
+		border: 1px solid var(--border-color);
+		background: rgba(16, 23, 36, 0.55);
+		transition: color var(--transition-smooth), transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 	}
 
 	.social-link:hover {
 		color: var(--accent-primary);
+		transform: translateY(-1px);
+		border-color: var(--border-hover);
+		background: rgba(16, 23, 36, 0.95);
 	}
 
 	@media (max-width: 768px) {

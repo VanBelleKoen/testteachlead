@@ -1,7 +1,10 @@
 ---
-title: "Test Engineering Is a Mindset, Not Just a Job"
-description: "Reflections on the tester mindset, quality, and the importance of challenging software mediocrity."
-pubDate: "2025-07-31"
+title: Test Engineering Is a Mindset, Not Just a Job
+description: Reflections on the tester mindset, quality, and the importance of challenging software mediocrity.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 At this year’s Testing Peers 2025 conference, `Katja Obrink` delivered a talk that stuck with me long after the applause faded. She didn’t present slides packed with metrics or showcase the latest toolchain—she spoke about something more fundamental: mindset.

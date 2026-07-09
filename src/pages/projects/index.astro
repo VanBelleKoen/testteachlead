@@ -1,51 +1,25 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import yaml from 'js-yaml';
-import fs from 'fs';
+import { getProjectCards } from '../../lib/content';
 
-const yamlFile: string = fs.readFileSync('src/content/projects.yaml', 'utf8');
-const yamlData = yaml.load(yamlFile);
-const projects = (yamlData && typeof yamlData === 'object' && 'projects' in yamlData) ? (yamlData.projects as Array<{ slug: string; title: string; description: string }>) : [];
-
-function getProjectTags(slug: string): string[] {
-  const tags: Record<string, string[]> = {
-    Jobbonus: ['Government', 'Eligibility System'],
-    Sustatool: ['Sustainability', 'KPI Tracking'],
-    VlaamseArbeidsmigratie: ['Government', 'Migration Registry'],
-    Kwaliteitsdatabank: ['Government', 'Open Data Registry'],
-    Opleidingsverlof: ['Government', 'Education Scheme'],
-    KwalificerendWerkplekleren: ['Government', 'Education Grant'],
-    PIO: ['Astro Blog', 'Knowledge Sharing'],
-    Loket: ['Government', 'Portal Hub'],
-    Zetes: ['Signing Service', 'Security'],
-    mbp: ['Government', 'Citizen Portal'],
-    WebPlatform: ['Frameworks', 'Public Sector'],
-    TestDataGenerator: ['Testing Utility', 'Serverless'],
-    ewings: ['E-commerce', 'Proof of Concept'],
-    arxcus: ['Invoicing Tool', 'Billing POC'],
-    BaloiseInsurance: ['Testing Integration', 'Insurance'],
-    Argenta: ['Mobile Banking', 'FinTech'],
-    VEX: ['Supply Chain', 'Logistics Platform']
-  };
-  return tags[slug] || ['Software Engineering'];
-}
+const projects = await getProjectCards();
 ---
 
 <SiteLayout title="Projects" description="Personal and professional projects by Koen Van Belle.">
   <div class="projects-container">
-    <header class="page-header">
+    <header class="page-header surface-elevated animate-rise-in">
+      <div class="section-kicker">Delivery Portfolio</div>
       <h1 class="page-title">Projects</h1>
       <p class="page-subtitle">A collection of systems, applications, and integrations I have built or tested.</p>
     </header>
 
     <div class="projects-grid">
       {projects.map(project => {
-        const tags = getProjectTags(project.slug);
         return (
-          <article class="project-card">
+          <article class="project-card motion-lift">
             <div class="card-body">
               <div class="card-tags">
-                {tags.map(tag => (
+                {project.tags.map(tag => (
                   <span class="tag-badge">{tag}</span>
                 ))}
               </div>
@@ -78,12 +52,25 @@ function getProjectTags(slug: string): string[] {
   }
 
   .page-header {
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.2rem 1.4rem 1.8rem 1.4rem;
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-kicker {
+    margin: 0 0 0.55rem 0;
+    font-size: 0.74rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent-projects);
+    font-family: var(--font-mono);
   }
 
   .page-title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 800;
     margin: 0 0 0.5rem 0;
   }
@@ -98,22 +85,23 @@ function getProjectTags(slug: string): string[] {
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 1.45rem;
   }
 
   .project-card {
-    background: var(--bg-secondary);
+    background: linear-gradient(160deg, rgba(16, 185, 129, 0.13), rgba(16, 185, 129, 0.01)), var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: border-color var(--transition-smooth);
+    transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth), transform var(--transition-fast);
   }
 
   .project-card:hover {
     border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
   }
 
   .card-tags {
@@ -125,11 +113,11 @@ function getProjectTags(slug: string): string[] {
 
   .tag-badge {
     font-size: 0.75rem;
-    background: var(--bg-tertiary);
+    background: rgba(6, 10, 18, 0.54);
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
+    padding: 0.18rem 0.52rem;
+    border-radius: 999px;
     font-weight: 500;
   }
 
@@ -146,7 +134,7 @@ function getProjectTags(slug: string): string[] {
   }
 
   .card-link:hover {
-    color: var(--accent-primary);
+    color: var(--accent-projects);
   }
 
   .card-org {

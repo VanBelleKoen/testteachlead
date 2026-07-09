@@ -1,7 +1,10 @@
 ---
-title: "Testing with Manifold: Type Safety and Code Generation in Java"
-description: "How Manifold enhances Java development and testing with type-safe APIs, code generation, and metaprogramming."
-pubDate: "2025-07-31"
+title: 'Testing with Manifold: Type Safety and Code Generation in Java'
+description: How Manifold enhances Java development and testing with type-safe APIs, code generation, and metaprogramming.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 Manifold is a powerful Java compiler plugin that brings several innovative features to the table, elevating your Java development experience. At its core, Manifold enables type-safe metaprogramming, allowing you to manipulate code as data during compilation while ensuring safety and correctness. This opens up a world of possibilities, including creating extension methods to enhance existing classes seamlessly and defining custom behaviors for operators through operator overloading.

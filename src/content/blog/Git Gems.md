@@ -1,7 +1,11 @@
 ---
-title: "The Git Gems You're Probably Not Using (But Should Be)"
-description: "Discover powerful yet underused Git commands to improve your workflow."
-pubDate: "2023-10-10"
+title: The Git Gems You're Probably Not Using (But Should Be)
+description: Discover powerful yet underused Git commands to improve your workflow.
+pubDate: '2023-10-10'
+category: developer-tooling
+tags:
+  - developer-tooling
+  - git
 ---
 
 Git is one of the most powerful tools in a developer’s toolbox—but even seasoned users often only scratch the surface. We all know the basics: `commit`, `branch`, `merge`, `rebase`, `stash`. But there’s a treasure trove of lesser-known Git commands that can dramatically improve your workflow—if you know they exist.

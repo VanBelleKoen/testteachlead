@@ -1,7 +1,10 @@
 ---
-title: "SSH Key Management for Multiple AWS Accounts"
-description: "A guide on managing SSH keys for multiple AWS accounts, including key generation, configuration, and usage."
-pubDate: "2023-10-10"
+title: SSH Key Management for Multiple AWS Accounts
+description: A guide on managing SSH keys for multiple AWS accounts, including key generation, configuration, and usage.
+pubDate: '2023-10-10'
+category: testing
+tags:
+  - testing
 ---
 
 ## SSH Key Management

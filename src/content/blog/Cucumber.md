@@ -1,7 +1,11 @@
 ---
-title: "Cucumber in BDD"
-description: "A practical look at Cucumber’s role in Behavior Driven Development and real-world project experiences."
-pubDate: "2025-07-31"
+title: Cucumber in BDD
+description: A practical look at Cucumber’s role in Behavior Driven Development and real-world project experiences.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - test-tools
 ---
 
 Cucumber was developed to assist testing in a Behavior Driven Development (BDD) environment. Since the primary function of BDD is facilitating the communication between business and developers. Cucumber was created to fill in the gap between business and testers.

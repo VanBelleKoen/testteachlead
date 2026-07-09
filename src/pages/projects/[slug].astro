@@ -1,46 +1,23 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import yaml from 'js-yaml';
-import fs from 'fs';
+import { type CollectionEntry, render } from 'astro:content';
+import { getProjectStaticPaths } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const yamlFile = fs.readFileSync('src/content/projects.yaml', 'utf8');
-  const yamlData = yaml.load(yamlFile) as { projects: { slug: string; title: string; description: string }[] };
-  return yamlData.projects.map(project => {
-    return {
-      params: { slug: project.slug },
-      props: { 
-        ...project
-      },
-    };
-  });
+  return getProjectStaticPaths();
 }
 
-const { title, description, slug } = Astro.props as { title: string; description: string; slug: string };
-
-// Dynamically import the markdown file as a component
-let ProjectContent;
-try {
-  ProjectContent = (await import(`../../content/projects/${slug}.md`)).default;
-} catch (error) {
-  console.error(`Could not load markdown file for project: ${slug}`, error);
-  ProjectContent = null;
-}
+const project = Astro.props as CollectionEntry<'projects'>;
+const { Content } = await render(project);
+const { title, description } = project.data;
 ---
 <SiteLayout title={title} description={description}>
   <article class="project-post-container">
-    <div class="prose-card">
-      {ProjectContent ? (
-        <div class="project-content">
-          <ProjectContent />
-        </div>
-      ) : (
-        <div class="project-fallback">
-          <h1 class="project-fallback-title">{title}</h1>
-          <hr class="header-divider" />
-          <p class="project-fallback-desc">{description}</p>
-        </div>
-      )}
+    <div class="prose-card surface-elevated">
+      <div class="project-kicker">Case Study</div>
+      <div class="project-content">
+        <Content />
+      </div>
       <div class="back-navigation">
         <a href="/projects" class="back-link">&larr; Back to all projects</a>
       </div>
@@ -55,18 +32,27 @@ try {
   }
 
   .prose-card {
-    background: var(--bg-secondary);
+    background: linear-gradient(165deg, rgba(16, 185, 129, 0.14), rgba(16, 185, 129, 0.01)), var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 3rem;
     box-shadow: var(--shadow-md);
+  }
+
+  .project-kicker {
+    margin: 0 0 0.65rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent-projects);
   }
 
   /* Target markdown contents */
   .project-content :global(h1) {
     font-size: 2.25rem;
     line-height: 1.2;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1rem 0;
     letter-spacing: -0.025em;
   }
 
@@ -94,25 +80,6 @@ try {
     color: var(--text-secondary);
   }
 
-  /* Fallback template styling if MD file fails to load */
-  .project-fallback-title {
-    font-size: 2.25rem;
-    line-height: 1.2;
-    margin: 0 0 1rem 0;
-  }
-
-  .header-divider {
-    border: none;
-    height: 1px;
-    background: var(--border-color);
-    margin: 1.5rem 0;
-  }
-
-  .project-fallback-desc {
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
   /* Navigation footer */
   .back-navigation {
     margin-top: 3rem;
@@ -128,7 +95,7 @@ try {
   }
 
   .back-link:hover {
-    color: var(--accent-primary);
+    color: var(--accent-projects);
   }
 
   @media (max-width: 768px) {

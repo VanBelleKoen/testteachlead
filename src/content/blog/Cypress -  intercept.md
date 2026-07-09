@@ -1,7 +1,11 @@
 ---
-title: "Cypress Intercept: Control, Mock, and Test Network Requests"
-description: "A practical guide to using Cypress intercept for frontend testing, mocking, and error handling."
-pubDate: "2025-07-31"
+title: 'Cypress Intercept: Control, Mock, and Test Network Requests'
+description: A practical guide to using Cypress intercept for frontend testing, mocking, and error handling.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 ## Cypress Intercept, Why ?

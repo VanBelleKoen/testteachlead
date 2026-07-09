@@ -1,7 +1,11 @@
 ---
-title: "Eggplant Test Automation Review"
-description: "An in-depth look at the Eggplant test automation tool, its features, advantages, and limitations."
-pubDate: "2023-10-10"
+title: Eggplant Test Automation Review
+description: An in-depth look at the Eggplant test automation tool, its features, advantages, and limitations.
+pubDate: '2023-10-10'
+category: testing
+tags:
+  - testing
+  - test-tools
 ---
 
 An image based test automation tool powered by machine learning and AI. Is this a collect of the latest buzzwords or a powerful testing tool? Let's take a look at the word separately before making up our mind.

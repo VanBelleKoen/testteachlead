@@ -1,7 +1,10 @@
 ---
-title: "Safetest: Netflix’s Next-Gen UI Testing Framework"
-description: "A deep dive into Safetest, Netflix’s UI testing solution combining Playwright and Jest/Vitest for robust, framework-agnostic testing."
-pubDate: "2025-07-31"
+title: 'Safetest: Netflix’s Next-Gen UI Testing Framework'
+description: A deep dive into Safetest, Netflix’s UI testing solution combining Playwright and Jest/Vitest for robust, framework-agnostic testing.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 In the fast-paced world of web development, robust UI testing is non-negotiable. Netflix, a company renowned for its innovative engineering, has introduced Safetest, a UI testing framework that merges the power of Playwright and Jest/vitest into a unified solution. Let's dive into what Safetest offers, how to get started, and its strengths and weaknesses in the UI testing landscape.

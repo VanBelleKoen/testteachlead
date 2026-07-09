@@ -1,7 +1,10 @@
 ---
-title: "The Joy of Software Testing: From Frustrated Support to Puzzle-Solving QA"
-description: "A deep dive into the satisfying world of software testing, and how it transforms frustration into joy."
-pubDate: "2025-07-31"
+title: 'The Joy of Software Testing: From Frustrated Support to Puzzle-Solving QA'
+description: A deep dive into the satisfying world of software testing, and how it transforms frustration into joy.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 There's something deeply satisfying about finding the crack in a seemingly perfect system. Not in a destructive way, but in the way a detective finds the missing piece of evidence that solves the case. This is the joy I've discovered in software testing, a joy that emerged from the ashes of my frustration as a support engineer.

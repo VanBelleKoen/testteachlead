@@ -1,7 +1,10 @@
 ---
-title: "Coded vs low-coded automation"
-description: "Comparing coded and low-coded automation approaches and criteria for choosing between them."
-pubDate: "2025-07-31"
+title: Coded vs low-coded automation
+description: Comparing coded and low-coded automation approaches and criteria for choosing between them.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 # Coded vs low-coded automation

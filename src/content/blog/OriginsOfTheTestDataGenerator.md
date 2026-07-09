@@ -1,7 +1,10 @@
 ---
-title: "What is the b.ignited Test-Data-Generator ?"
-description: "An overview of the b.ignited Test-Data-Generator, its purpose, and development."
-pubDate: "2023-10-05"
+title: What is the b.ignited Test-Data-Generator ?
+description: An overview of the b.ignited Test-Data-Generator, its purpose, and development.
+pubDate: '2023-10-05'
+category: testing
+tags:
+  - testing
 ---
 
 The Test-Data-Generator (TDG) is a serverless application, written in python with an angular frontend. And while this is the technical answer, it doesn't answer the question. Even worse, you probably have more questions now.

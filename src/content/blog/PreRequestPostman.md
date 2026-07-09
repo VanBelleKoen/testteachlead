@@ -1,7 +1,11 @@
 ---
-title: "How to Setup a Pre-request Script in Postman"
-description: "Learn how to use Postman's Pre-Request scripts for better API testing."
-pubDate: "2025-07-31"
+title: How to Setup a Pre-request Script in Postman
+description: Learn how to use Postman's Pre-Request scripts for better API testing.
+pubDate: '2025-07-31'
+category: api-testing
+tags:
+  - testing
+  - api-testing
 ---
 
 We all know Postman as an API 'developement|testing' tool, specifically designed for developers. I have seen developers use the environment and global variables feature. Yet we all seem to ignore the possibility to write Pre-Request scripts. The documentation is unclear or too complicated. And I agree, the docs on fully fledged Pre-Request scripts is lacking. So let’s fix that, shall we.

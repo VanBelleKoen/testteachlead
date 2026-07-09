@@ -1,7 +1,11 @@
 ---
-title: "Cypress for Beginners: 5 Commands to Kickstart Your Testing Journey"
-description: "An introductory guide to Cypress commands for beginners."
-pubDate: "2023-10-10"
+title: 'Cypress for Beginners: 5 Commands to Kickstart Your Testing Journey'
+description: An introductory guide to Cypress commands for beginners.
+pubDate: '2023-10-10'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 Welcome to the exciting world of Cypress! If you're new to web application testing, Cypress is a fantastic framework that makes writing and running tests a breeze. To start your journey, let's explore five essential Cypress commands that will quickly become your testing arsenal.
@@ -40,7 +44,7 @@ Now that you've landed on your webpage, it's time to interact with it. This is w
 
 Here's how you'd use cy.get() with these selectors:
 
-```JavaScript
+```javascript
   cy.get('button')            // Get all buttons on the page
   cy.get('.my-button')       // Get elements with the class "my-button"
   cy.get('#submit')          // Get the element with the ID "submit"
@@ -48,7 +52,7 @@ Here's how you'd use cy.get() with these selectors:
 ```
 cy.get() is incredibly versatile. You can even chain it with other commands to perform actions on the elements you find. For example:
 
-```JavaScript
+```javascript
 cy.get('button').click()  // Find a button and click it
 cy.get('button').first() // Select only the first of all buttons
 cy.get('input[name="email"]').type('test@example.com') // Find an input field and type into it

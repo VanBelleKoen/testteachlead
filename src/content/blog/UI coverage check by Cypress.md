@@ -1,7 +1,11 @@
 ---
-title: "Cypress.io UI Coverage: Ensuring Complete Test Coverage"
-description: "A guide to Cypress UI Coverage tool, its benefits, and how it helps achieve comprehensive UI test coverage."
-pubDate: "2025-07-31"
+title: 'Cypress.io UI Coverage: Ensuring Complete Test Coverage'
+description: A guide to Cypress UI Coverage tool, its benefits, and how it helps achieve comprehensive UI test coverage.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 Testing can often feel like a game of cat and mouse—no matter how thorough you think you’ve been, there’s always the chance something important has slipped through the cracks. I learned this lesson firsthand when a button on a rarely used settings page failed in production. Despite what felt like a well-covered test suite, this one crucial interaction had been missed.

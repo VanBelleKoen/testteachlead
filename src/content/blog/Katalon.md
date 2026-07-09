@@ -1,7 +1,11 @@
 ---
-title: "Katalon for API Testing: A Practical Guide"
-description: "Exploring Katalon's features, setup, and scripting for effective API test automation."
-pubDate: "2025-07-31"
+title: 'Katalon for API Testing: A Practical Guide'
+description: Exploring Katalon's features, setup, and scripting for effective API test automation.
+pubDate: '2025-07-31'
+category: api-testing
+tags:
+  - testing
+  - api-testing
 ---
 
 While Katalon wants to Simplify API, Web, Mobile Automation Testing, in this post we'll focus purely on API testing. And we'll see how well the slogan represents the product.

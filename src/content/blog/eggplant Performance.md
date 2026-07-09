@@ -1,7 +1,11 @@
 ---
-title: "Eggplant Performance"
-description: "Your app is one traffic spike away from a meltdown. Let's fix that."
-pubDate: "2026-04-27"
+title: Eggplant Performance
+description: Your app is one traffic spike away from a meltdown. Let's fix that.
+pubDate: '2026-04-27'
+category: testing
+tags:
+  - testing
+  - performance-testing
 ---
 
 # Your App Is One Traffic Spike Away From a Meltdown. Let's Fix That.

@@ -1,7 +1,11 @@
 ---
-title: "AI, LLM, MCP and agents"
-description: "The real difference between LLMs, MCP, and agentic applications."
-pubDate: "2026-05-27"
+title: AI, LLM, MCP and agents
+description: The real difference between LLMs, MCP, and agentic applications.
+pubDate: '2026-05-27'
+category: ai-and-tooling
+tags:
+  - ai
+  - llm
 ---
 
 # The Real Difference Between LLMs, MCP, and Agentic Applications

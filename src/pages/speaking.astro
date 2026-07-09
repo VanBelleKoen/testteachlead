@@ -1,17 +1,10 @@
 ---
-import yaml from 'js-yaml';
-import fs from 'fs';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { getSpeakingEngagementsSorted } from '../lib/content';
 
-interface Engagement {
-  date: string;
-  title: string;
-  location: string;
-  description: string;
-}
-
-const yamlFile: string = fs.readFileSync('src/content/speaking.yaml', 'utf8');
-const yamlData = yaml.load(yamlFile) as { engagements: Engagement[] };
+const engagements = await getSpeakingEngagementsSorted();
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 function getStartDate(dateVal: string | Date): Date {
   if (dateVal instanceof Date) return dateVal;
@@ -21,21 +14,19 @@ function getStartDate(dateVal: string | Date): Date {
   }
   return new Date(str.trim());
 }
-
-const engagements: Engagement[] = yamlData.engagements.sort((a, b) => {
-  return getStartDate(b.date).getTime() - getStartDate(a.date).getTime();
-});
 ---
 
 <SiteLayout title="Speaking Engagements" description="Upcoming and past speaking events by Koen Van Belle.">
   <div class="speaking-container">
-    <header class="page-header">
+    <header class="page-header surface-elevated animate-rise-in">
+      <div class="section-kicker">Talks and Conferences</div>
       <h1 class="page-title">Speaking Engagements</h1>
       <p class="page-subtitle">Past and upcoming tech talks, panels, and presentations.</p>
     </header>
 
     <div class="timeline">
-      {engagements.map((e: Engagement) => {
+      {engagements.map((e) => {
+        const isUpcoming = getStartDate(e.date).getTime() >= today.getTime();
         let dateDisplay = '';
         if (typeof e.date === 'string' && e.date.includes(' - ')) {
           const parts = e.date.split(' - ').map(s => s.trim());
@@ -50,13 +41,16 @@ const engagements: Engagement[] = yamlData.engagements.sort((a, b) => {
           dateDisplay = new Date(e.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
         }
         return (
-          <div class="timeline-item">
+          <div class:list={["timeline-item", { upcoming: isUpcoming, past: !isUpcoming }]}>
             <div class="timeline-badge">
               <span class="timeline-dot"></span>
             </div>
             <div class="timeline-content">
               <div class="engagement-meta">
                 <span class="engagement-date">{dateDisplay}</span>
+                <span class:list={["status-badge", { upcoming: isUpcoming, past: !isUpcoming }]}>
+                  {isUpcoming ? 'Upcoming' : 'Past'}
+                </span>
                 <span class="engagement-location">
                   <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="location-icon">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -67,6 +61,13 @@ const engagements: Engagement[] = yamlData.engagements.sort((a, b) => {
               </div>
               <h3 class="engagement-title">{e.title}</h3>
               <p class="engagement-desc">{e.description}</p>
+              {e.eventUrl && (
+                <div class="engagement-actions">
+                  <a href={e.eventUrl} class="event-link" target="_blank" rel="noopener noreferrer">
+                    View event details <span aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         );
@@ -82,12 +83,25 @@ const engagements: Engagement[] = yamlData.engagements.sort((a, b) => {
   }
 
   .page-header {
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.2rem 1.4rem 1.8rem 1.4rem;
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.6rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-kicker {
+    margin: 0 0 0.55rem 0;
+    font-size: 0.74rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent-speaking);
+    font-family: var(--font-mono);
   }
 
   .page-title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 800;
     margin: 0 0 0.5rem 0;
   }
@@ -139,14 +153,25 @@ const engagements: Engagement[] = yamlData.engagements.sort((a, b) => {
     height: 11px;
     border-radius: 50%;
     background: var(--bg-primary);
-    border: 2px solid var(--accent-primary);
+    border: 2px solid var(--accent-speaking);
   }
 
   .timeline-content {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 1.75rem;
+    transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth), transform var(--transition-fast);
+  }
+
+  .timeline-item.upcoming .timeline-content {
+    background: linear-gradient(160deg, rgba(245, 158, 11, 0.18), rgba(245, 158, 11, 0.03)), var(--bg-secondary);
+    border-color: rgba(245, 158, 11, 0.45);
+    box-shadow: 0 10px 26px rgba(245, 158, 11, 0.08);
+  }
+
+  .timeline-item.past .timeline-content {
+    background: linear-gradient(160deg, rgba(14, 165, 233, 0.08), rgba(14, 165, 233, 0.01)), var(--bg-secondary);
   }
 
   .engagement-meta {
@@ -163,8 +188,31 @@ const engagements: Engagement[] = yamlData.engagements.sort((a, b) => {
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     padding: 0.25rem 0.6rem;
-    border-radius: 4px;
+    border-radius: 999px;
     font-weight: 500;
+  }
+
+  .status-badge {
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    padding: 0.2rem 0.55rem;
+    font-size: 0.73rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+  }
+
+  .status-badge.upcoming {
+    border-color: rgba(245, 158, 11, 0.42);
+    color: var(--accent-speaking);
+    background: rgba(245, 158, 11, 0.12);
+  }
+
+  .status-badge.past {
+    border-color: rgba(14, 165, 233, 0.3);
+    color: var(--accent-secondary);
+    background: rgba(14, 165, 233, 0.1);
   }
 
   .engagement-location {
@@ -192,6 +240,25 @@ const engagements: Engagement[] = yamlData.engagements.sort((a, b) => {
     font-size: 0.95rem;
     color: var(--text-secondary);
     line-height: 1.6;
+  }
+
+  .engagement-actions {
+    margin-top: 1rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid rgba(33, 49, 76, 0.7);
+  }
+
+  .event-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--accent-speaking);
+    font-weight: 600;
+    font-size: 0.88rem;
+  }
+
+  .event-link:hover {
+    color: #f8c15b;
   }
 
   @media (max-width: 600px) {

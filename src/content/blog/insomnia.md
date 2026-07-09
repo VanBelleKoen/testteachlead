@@ -1,7 +1,11 @@
 ---
-title: "Insomnia: Effortless API Design and Testing"
-description: "A hands-on guide to using Insomnia for building, chaining, and managing API requests with ease."
-pubDate: "2025-07-31"
+title: 'Insomnia: Effortless API Design and Testing'
+description: A hands-on guide to using Insomnia for building, chaining, and managing API requests with ease.
+pubDate: '2025-07-31'
+category: api-testing
+tags:
+  - testing
+  - api-testing
 ---
 
 > *Design and debug APIs like a human, not a robot.*
@@ -22,7 +26,7 @@ Start off with the post pet request.
 
 And in the body dropdown select JSON and copy paste the following data.
 
-```JSON
+```json
 {
   "id": 0,
   "category": {
@@ -102,7 +106,7 @@ This is where insomnia shows it's first major weakness or another strenght depen
 
 For this blogpost the plugin Faker was used. This plugin allows the user to generate most types of data that could be required during API testing.
 
-```Json
+```json
 {
   "id": "70665",
   "category": {

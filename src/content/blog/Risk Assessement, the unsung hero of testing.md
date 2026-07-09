@@ -1,7 +1,10 @@
 ---
-title: "The Great E2E Testing Money Pit: Why Your Test Suite is Burning Cash"
-description: "A humorous and strategic look at the costs and benefits of end-to-end testing."
-pubDate: "2025-07-31"
+title: 'The Great E2E Testing Money Pit: Why Your Test Suite is Burning Cash'
+description: A humorous and strategic look at the costs and benefits of end-to-end testing.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 Picture this: your end-to-end test suite is running, and you're watching the clock tick by like you're waiting for paint to dry on a rainy Sunday. Twenty minutes later, you discover that your "comprehensive" test failed because someone changed a button's CSS class. Congratulations, you've just experienced the joy of throwing money at a problem that could have been solved with a five-second unit test.

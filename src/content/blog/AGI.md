@@ -1,7 +1,11 @@
 ---
-title: "AGI is here, or is it just marketing?"
-description: "A critical look at the shifting definitions, benchmarks, and commercial motivations behind Artificial General Intelligence."
-pubDate: "2025-08-01"
+title: AGI is here, or is it just marketing?
+description: A critical look at the shifting definitions, benchmarks, and commercial motivations behind Artificial General Intelligence.
+pubDate: '2025-08-01'
+category: ai-and-tooling
+tags:
+  - ai
+  - llm
 ---
 
 ## It's all in the name

@@ -1,7 +1,10 @@
 ---
-title: "Test-Data-Generator: Automating Test Data for Quality Assurance"
-description: "A look at our evolving test-data-generator tool, its features, and how it supports test automation."
-pubDate: "2025-07-31"
+title: 'Test-Data-Generator: Automating Test Data for Quality Assurance'
+description: A look at our evolving test-data-generator tool, its features, and how it supports test automation.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
 ---
 
 An idea, that evolved into a command line application, into a rudimentary UI application that now became a serverless application. It became a prime example of how we grow as a company and as consultants.

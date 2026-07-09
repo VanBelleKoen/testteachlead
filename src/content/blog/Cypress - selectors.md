@@ -1,7 +1,11 @@
 ---
-title: "Selectors in Cypress: Best Practices for Robust Testing"
-description: "A deep dive into selectors, DOM traversal, and selector stability for effective Cypress testing."
-pubDate: "2025-07-31"
+title: 'Selectors in Cypress: Best Practices for Robust Testing'
+description: A deep dive into selectors, DOM traversal, and selector stability for effective Cypress testing.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - cypress
 ---
 
 Selectors are a fundamental part of frontend development and testing. They enable developers and testers to interact with and manipulate elements within the Document Object Model (DOM). In the context of automated testing, particularly with tools like Cypress, selectors play a crucial role in ensuring that tests are robust, maintainable, and reliable. This blog delves into the intricacies of selectors, the challenges of traversing the DOM, and the importance of selector stability, with a special focus on the Cypress frontend testing framework.

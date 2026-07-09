@@ -1,7 +1,11 @@
 ---
-title: "Artillery: Quick and Simple Load Testing"
-description: "How to use Artillery and JSON-SERVER for fast, modern API performance testing."
-pubDate: "2025-07-31"
+title: 'Artillery: Quick and Simple Load Testing'
+description: How to use Artillery and JSON-SERVER for fast, modern API performance testing.
+pubDate: '2025-07-31'
+category: testing
+tags:
+  - testing
+  - performance-testing
 ---
 
 # Artillery
@@ -18,17 +22,17 @@ Node is required to install the required server package and the actual testing a
 
 While both applications (Artillery and JSON-SERVER) can be installed globally, best practice dictates that npm packages are installed in a working directory using a package.json file. First we can start by initializing the project. So create a folder and perform the following command. Press enter until out of the flow.
 
-```BASH
+```bash
 npm init
 ```
 
 Install both applications using the following commands:
 
-```BASH
+```bash
 npm install json-server --save-dev
 ```
 
-```BASH
+```bash
 npm install artillery --save-dev
 ```
 
@@ -46,7 +50,7 @@ I know the quote is mostly attributed to Adam Savage. He had it from Alex Jason.
 
 Next start the server, so we have something to work against.
 
-```BASH
+```bash
 npx json-server --watch db.json
 ```
 
@@ -54,7 +58,7 @@ npx json-server --watch db.json
 
 Next step we should start configuring our artillery strike. This configuration is essential to fire off the multitude of API calls. Start by creating a file called postPost.yml. First add the coordinates of the strike or the url.
 
-```YAML
+```yaml
 config:
   target: "http://localhost:3000"
   phases:
@@ -68,7 +72,7 @@ After configuring the target and phases, define the actual scenario to fire. Aga
 
 In this code example a post with a json object has been defined, in which the return object is captured. The point of capturing this object is to use the value in the next call. Being able to chain different calls in such an easy fashion highlights the usability of this tool. Finally declare a get call and utilize the newly captured value using `{{ postId }}`.
 
-```YAML
+```yaml
 scenarios:
   - name: "Post and retrieve a post"
     flow:
@@ -86,7 +90,7 @@ scenarios:
 
 Now, the moment everyone waited for. Let's run the actual test. Inside the directory in which the yaml file is located, run the next command.
 
-```BASH
+```bash
 npx artillery run postPost.yml
 ```
 
