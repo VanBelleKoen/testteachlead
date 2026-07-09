@@ -28,21 +28,13 @@ jobs:
         node-version: '20'
         cache: 'npm'
 
-    - name: Prepare isolated npm config
-      run: |
-        cat > .npmrc.ci <<'EOF'
-        registry=https://registry.npmjs.org/
-        EOF
-
     - name: Install dependencies
       run: |
-        npm config get registry --userconfig .npmrc.ci
-        npm ci --userconfig .npmrc.ci
+        npm config get registry
+        npm ci
       env:
         NODE_AUTH_TOKEN: ''
         NPM_TOKEN: ''
-        NPM_CONFIG_USERCONFIG: ''
-        NPM_CONFIG_REGISTRY: ''
 
     - name: Validate content
       run: npm run lint:content
