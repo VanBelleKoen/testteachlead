@@ -2,13 +2,13 @@
 title: Me
 order: 1
 ---
-I have a problem: I want to know why.
+I have a specific personality trait: I want to know the why.
 
 Not occasionally. Not when it is useful. My brain has a habit of grabbing onto questions and refusing to let go until it understands what is happening.
 
 Sometimes that is helpful. Sometimes it means I spend far too long trying to understand something that most people would have simply accepted and moved on from.
 
-Why does software behave the way it does? Why do people make the choices they make? Why does one small gesture reveal more than an entire explanation? Why does one story stay with us for years while another disappears the moment we finish it?
+Why does software behave the way it does? Why do people do what they do? Why does one small gesture reveal more than an entire explanation? Why does one story stay with us for years while another disappears the moment we finish it?
 
 I am fascinated by how things work. Not just what happens, but why it happens.
 
@@ -34,4 +34,4 @@ And puzzles are hard to resist.
 
 From the smallest movement to the biggest speech, life is full of things that are far more interesting than they first appear.
 
-There is always a why.
+There is always another why.
