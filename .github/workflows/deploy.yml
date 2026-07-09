@@ -27,18 +27,22 @@ jobs:
       with:
         node-version: '20'
         cache: 'npm'
-        registry-url: 'https://registry.npmjs.org'
 
-    - name: Normalize npm auth config for public packages
+    - name: Prepare isolated npm config
       run: |
-        npm config set registry https://registry.npmjs.org/
-        npm config delete //registry.npmjs.org/:_authToken || true
+        cat > .npmrc.ci <<'EOF'
+        registry=https://registry.npmjs.org/
+        EOF
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm config get registry --userconfig .npmrc.ci
+        npm ci --userconfig .npmrc.ci
       env:
         NODE_AUTH_TOKEN: ''
         NPM_TOKEN: ''
+        NPM_CONFIG_USERCONFIG: ''
+        NPM_CONFIG_REGISTRY: ''
 
     - name: Validate content
       run: npm run lint:content
