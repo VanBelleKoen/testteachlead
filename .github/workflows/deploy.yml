@@ -29,9 +29,8 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: |
-        npm config get registry
-        npm ci
+      run:
+        npm i
       env:
         NODE_AUTH_TOKEN: ''
         NPM_TOKEN: ''
