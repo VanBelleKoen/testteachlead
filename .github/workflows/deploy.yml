@@ -29,7 +29,9 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm i --loglevel verbose
+      run: |
+        npm ci --include=optional
+        npm ls @rollup/rollup-linux-x64-gnu || npm i --no-save @rollup/rollup-linux-x64-gnu
 
     - name: Validate content
       run: npm run lint:content
