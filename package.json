@@ -21,7 +21,6 @@
     "sharp": "^0.34.2"
   },
   "devDependencies": {
-    "@playwright/test": "^1.54.2",
     "@types/js-yaml": "^4.0.9"
   }
 }
